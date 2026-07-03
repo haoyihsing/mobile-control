@@ -9,8 +9,7 @@
 5. Tap `Phone Trigger`.
 6. Tap `Run workflow`.
 7. Pick the action you want:
-   - `open-fubon`
-   - `open-chromium`
+   - `open-codex`
    - `status-check`
 8. Tap `Run workflow` again.
 
@@ -23,4 +22,3 @@
 
 - You do not need to type code on the phone.
 - You do not need to open a terminal on the phone.
-

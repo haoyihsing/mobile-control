@@ -22,4 +22,3 @@ This is the practical bridge for your phone.
 ## Suggested next step
 
 - Add a self-hosted runner on the desktop when you want the phone trigger to control local software.
-

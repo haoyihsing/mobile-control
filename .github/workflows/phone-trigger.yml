@@ -6,11 +6,10 @@ on:
       action:
         description: "What to run"
         required: true
-        default: "open-fubon"
+        default: "open-codex"
         type: choice
         options:
-          - open-fubon
-          - open-chromium
+          - open-codex
           - status-check
 
 jobs:
@@ -22,4 +21,3 @@ jobs:
           echo "Requested action: ${{ inputs.action }}"
           echo "This workflow is the mobile trigger entrypoint."
           echo "To run on your desktop, point this to a self-hosted runner or a local bridge."
-

@@ -6,11 +6,10 @@ on:
       action:
         description: "What to run"
         required: true
-        default: "open-fubon"
+        default: "open-codex"
         type: choice
         options:
-          - open-fubon
-          - open-chromium
+          - open-codex
           - status-check
 
 jobs:
@@ -21,4 +20,3 @@ jobs:
         run: |
           echo "Requested action: ${{ inputs.action }}"
           echo "This job is intended for a desktop self-hosted runner."
-
