@@ -1,0 +1,25 @@
+name: Phone Trigger
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "What to run"
+        required: true
+        default: "open-fubon"
+        type: choice
+        options:
+          - open-fubon
+          - open-chromium
+          - status-check
+
+jobs:
+  dispatch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show requested action
+        run: |
+          echo "Requested action: ${{ inputs.action }}"
+          echo "This workflow is the mobile trigger entrypoint."
+          echo "To run on your desktop, point this to a self-hosted runner or a local bridge."
+

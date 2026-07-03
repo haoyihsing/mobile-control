@@ -1,0 +1,24 @@
+name: Phone Trigger Self Hosted
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "What to run"
+        required: true
+        default: "open-fubon"
+        type: choice
+        options:
+          - open-fubon
+          - open-chromium
+          - status-check
+
+jobs:
+  run-local:
+    runs-on: self-hosted
+    steps:
+      - name: Show requested action
+        run: |
+          echo "Requested action: ${{ inputs.action }}"
+          echo "This job is intended for a desktop self-hosted runner."
+
