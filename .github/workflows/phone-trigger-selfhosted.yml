@@ -16,7 +16,26 @@ jobs:
   run-local:
     runs-on: self-hosted
     steps:
-      - name: Show requested action
+      - name: Run requested action
+        shell: powershell
         run: |
-          echo "Requested action: ${{ inputs.action }}"
-          echo "This job is intended for a desktop self-hosted runner."
+          $action = "${{ inputs.action }}"
+          Write-Host "Requested action: $action"
+
+          switch ($action) {
+            "open-codex" {
+              $chrome = 'D:\Codex\chromium\chrome-win\chrome.exe'
+              if (Test-Path $chrome) {
+                Start-Process -WindowStyle Hidden $chrome
+                Write-Host "Opened Chromium."
+              } else {
+                throw "Chromium not found at $chrome"
+              }
+            }
+            "status-check" {
+              Write-Host "Runner is online and accepted the job."
+            }
+            default {
+              throw "Unknown action: $action"
+            }
+          }

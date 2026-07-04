@@ -16,8 +16,7 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Show requested action
+      - name: Redirect to self-hosted workflow
         run: |
           echo "Requested action: ${{ inputs.action }}"
-          echo "This workflow is the mobile trigger entrypoint."
-          echo "To run on your desktop, point this to a self-hosted runner or a local bridge."
+          echo "Use 'Phone Trigger Self Hosted' to run on your desktop runner."

@@ -6,7 +6,7 @@
 2. Sign in to the account that owns this repo.
 3. Open this repository.
 4. Tap `Actions`.
-5. Tap `Phone Trigger`.
+5. Tap `Phone Trigger Self Hosted`.
 6. Tap `Run workflow`.
 7. Pick the action you want:
    - `open-codex`
@@ -15,8 +15,8 @@
 
 ## What happens next
 
-- If this is the cloud workflow, GitHub records the request.
-- If you connect a self-hosted runner later, the action can run on your desktop.
+- The workflow runs on your self-hosted runner.
+- The desktop action should happen immediately if the runner is online.
 
 ## What you do not need
 

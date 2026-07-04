@@ -36,9 +36,18 @@ try {
             }
 
             switch ($payload.action) {
-                "open-chromium" {
-                    Start-Process -WindowStyle Hidden 'D:\Codex\chromium\chrome-win\chrome.exe'
-                    $result = @{ ok = $true; action = "open-chromium" }
+                "open-codex" {
+                    $chrome = 'D:\Codex\chromium\chrome-win\chrome.exe'
+                    if (Test-Path $chrome) {
+                        Start-Process -WindowStyle Hidden $chrome
+                        $result = @{ ok = $true; action = "open-codex" }
+                    } else {
+                        $result = @{ ok = $false; error = "chromium-not-found" }
+                        $response.StatusCode = 500
+                    }
+                }
+                "status-check" {
+                    $result = @{ ok = $true; action = "status-check" }
                 }
                 default {
                     $result = @{ ok = $false; error = "unknown action" }
@@ -62,4 +71,3 @@ finally {
     }
     $listener.Close()
 }
-
