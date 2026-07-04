@@ -14,10 +14,21 @@ on:
 
 jobs:
   run-local:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
     steps:
       - name: Run requested action
-        shell: cmd
+        shell: bash
         run: |
-          @echo off
-          powershell -NoProfile -ExecutionPolicy Bypass -Command "$action = '${{ inputs.action }}'; Write-Host ('Requested action: ' + $action); if ($action -eq 'open-codex') { $candidatePaths = @('C:\Program Files\WindowsApps\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\app\Codex.exe','C:\Program Files\WindowsApps\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\Codex.exe'); $launched = $false; foreach ($path in $candidatePaths) { if (Test-Path $path) { Start-Process -FilePath $path; Write-Host ('Opened Codex from ' + $path); $launched = $true; break } }; if (-not $launched) { $app = Get-StartApps | Where-Object { $_.Name -match 'Codex|ChatGPT' } | Select-Object -First 1; if ($app) { Start-Process explorer.exe ('shell:AppsFolder\' + $app.AppID); Write-Host ('Opened app via Start menu entry: ' + $app.Name); $launched = $true } }; if (-not $launched) { throw 'Could not locate a launchable Codex/ChatGPT app entry' } } elseif ($action -eq 'status-check') { Write-Host 'Runner is online and accepted the job.' } else { throw ('Unknown action: ' + $action) }"
+          set -euo pipefail
+          action='${{ inputs.action }}'
+          echo "Requested action: ${action}"
+          if [ "${action}" = "open-codex" ]; then
+            echo "Cloud mode is active."
+            echo "No local desktop app can be opened from GitHub-hosted runners."
+            echo "Use this workflow for cloud tasks only."
+          elif [ "${action}" = "status-check" ]; then
+            echo "Cloud runner is online and accepted the job."
+          else
+            echo "Unknown action: ${action}"
+            exit 1
+          fi

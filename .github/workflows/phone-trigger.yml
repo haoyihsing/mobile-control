@@ -16,7 +16,19 @@ jobs:
   dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Redirect to self-hosted workflow
+      - name: Run cloud action
+        shell: bash
         run: |
-          echo "Requested action: ${{ inputs.action }}"
-          echo "Use 'Phone Trigger Self Hosted' to run on your desktop runner."
+          set -euo pipefail
+          action='${{ inputs.action }}'
+          echo "Requested action: ${action}"
+          if [ "${action}" = "open-codex" ]; then
+            echo "Cloud mode is active."
+            echo "No local desktop app can be opened from GitHub-hosted runners."
+            echo "Use this workflow for cloud tasks only."
+          elif [ "${action}" = "status-check" ]; then
+            echo "Cloud runner is online and accepted the job."
+          else
+            echo "Unknown action: ${action}"
+            exit 1
+          fi
