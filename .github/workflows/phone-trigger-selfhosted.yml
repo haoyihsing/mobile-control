@@ -24,12 +24,12 @@ jobs:
 
           switch ($action) {
             "open-codex" {
-              $chrome = 'D:\Codex\chromium\chrome-win\chrome.exe'
-              if (Test-Path $chrome) {
-                Start-Process -WindowStyle Hidden $chrome
-                Write-Host "Opened Chromium."
+              $codex = 'C:\Program Files\WindowsApps\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\app\Codex.exe'
+              if (Test-Path $codex) {
+                Start-Process $codex
+                Write-Host "Opened Codex."
               } else {
-                throw "Chromium not found at $chrome"
+                throw "Codex not found at $codex"
               }
             }
             "status-check" {

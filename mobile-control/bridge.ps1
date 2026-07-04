@@ -37,12 +37,12 @@ try {
 
             switch ($payload.action) {
                 "open-codex" {
-                    $chrome = 'D:\Codex\chromium\chrome-win\chrome.exe'
-                    if (Test-Path $chrome) {
-                        Start-Process -WindowStyle Hidden $chrome
+                    $codex = 'C:\Program Files\WindowsApps\OpenAI.Codex_26.623.13972.0_x64__2p2nqsd0c76g0\app\Codex.exe'
+                    if (Test-Path $codex) {
+                        Start-Process $codex
                         $result = @{ ok = $true; action = "open-codex" }
                     } else {
-                        $result = @{ ok = $false; error = "chromium-not-found" }
+                        $result = @{ ok = $false; error = "codex-not-found" }
                         $response.StatusCode = 500
                     }
                 }
